@@ -1,19 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { ListGroup, Form } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 function TodoItem({ todo, onToggle, onDelete }) {
+    const handleCheckboxChange = () => {
+        onToggle(todo.id);
+    };
+
+    const handleDeleteClick = () => {
+        onDelete(todo.id);
+    };
+
     return (
-        <li>
-            <input
+        <ListGroup.Item className={`d-flex align-items-center justify-content-between todo-item ${todo.completed ? 'completed' : ''}`}>            <Form.Check
                 type="checkbox"
+                id={`checkbox-${todo.id}`}
+                label={todo.title}
                 checked={todo.completed}
-                onChange={() => onToggle(todo.id, !todo.completed)} // Pass todo id and new completion status
+                onChange={handleCheckboxChange}
             />
-            <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
-        {todo.title}
-      </span>
-            <p>{todo.description}</p> {/* Display the description */}
-            <button onClick={() => onDelete(todo.id)}>Delete</button> {/* Pass todo id */}
-        </li>
+            <small>{todo.description}</small>
+            <FontAwesomeIcon
+                icon={faTrash}
+                className="delete-icon"
+                onClick={handleDeleteClick}
+            />
+        </ListGroup.Item>
     );
 }
 

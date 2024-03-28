@@ -1,0 +1,15 @@
+.todo-item.completed {
+    text-decoration: line-through;
+    color: #808080; /* Gray color */
+}
+
+.todo-content {
+    flex-grow: 1; /* Allow content to grow to fill available space */
+    display: flex;
+    align-items: center;
+}
+
+.delete-icon {
+    cursor: pointer;
+    margin-left: 10px; /* Add space between todo content and delete icon */
+}
